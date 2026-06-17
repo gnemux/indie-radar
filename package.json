@@ -1,0 +1,20 @@
+{
+  "name": "indie-opportunity-radar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Daily Indie Opportunity Radar that turns public signals into a Linear issue.",
+  "scripts": {
+    "start": "npm run build && node dist/src/index.js",
+    "build": "tsc",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "check": "npm run build && npm run test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "typescript": "^5.5.4"
+  }
+}

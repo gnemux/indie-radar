@@ -1,0 +1,57 @@
+name: Daily Indie Radar
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+      timezone: "Asia/Shanghai"
+  workflow_dispatch:
+    inputs:
+      run_date:
+        description: "Optional report date in YYYY-MM-DD"
+        required: false
+        type: string
+      dry_run:
+        description: "Generate the report without creating/updating Linear"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run start
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'qwen/qwen3.7-max' }}
+          OPENROUTER_MAX_TOKENS: ${{ vars.OPENROUTER_MAX_TOKENS || '5000' }}
+          OPENROUTER_HTTP_REFERER: ${{ vars.OPENROUTER_HTTP_REFERER || '' }}
+          OPENROUTER_APP_TITLE: ${{ vars.OPENROUTER_APP_TITLE || 'Indie Opportunity Radar' }}
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          LINEAR_TEAM_ID: ${{ secrets.LINEAR_TEAM_ID }}
+          LINEAR_PROJECT_ID: ${{ secrets.LINEAR_PROJECT_ID }}
+          LINEAR_PARENT_ISSUE_ID: ${{ vars.LINEAR_PARENT_ISSUE_ID || '' }}
+          LINEAR_STATE_ID: ${{ secrets.LINEAR_STATE_ID }}
+          LINEAR_LABEL_IDS: ${{ secrets.LINEAR_LABEL_IDS }}
+          LINEAR_ON_DUPLICATE: ${{ vars.LINEAR_ON_DUPLICATE || 'update' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCT_HUNT_TOKEN: ${{ secrets.PRODUCT_HUNT_TOKEN }}
+          TIMEZONE: ${{ vars.TIMEZONE || 'Asia/Shanghai' }}
+          RUN_DATE: ${{ inputs.run_date || '' }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+          SKIP_LLM: "false"
+          SKIP_LINEAR: "false"
+          MOCK_SOURCES: "false"
+          PROMPT_PATH: prompts/daily-radar.md
+          MAX_CANDIDATES_FOR_LLM: ${{ vars.MAX_CANDIDATES_FOR_LLM || '35' }}
