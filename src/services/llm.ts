@@ -70,7 +70,7 @@ export async function generateReport(
         ],
         max_completion_tokens: config.openrouterMaxTokens,
       },
-      timeoutMs: 90_000,
+      timeoutMs: 600_000,
     });
 
     const markdown = extractOutputText(response).trim();

@@ -32,7 +32,7 @@ export function loadConfig(): AppConfig {
     skipLinear: getBooleanEnv("SKIP_LINEAR", false),
     mockSources: getBooleanEnv("MOCK_SOURCES", false),
     promptPath: getOptionalEnv("PROMPT_PATH") ?? "prompts/daily-radar.md",
-    maxCandidatesForLlm: getIntegerEnv("MAX_CANDIDATES_FOR_LLM", 35),
+    maxCandidatesForLlm: getIntegerEnv("MAX_CANDIDATES_FOR_LLM", 45),
   };
 }
 

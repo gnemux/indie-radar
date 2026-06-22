@@ -7,12 +7,13 @@ export function issueTitle(date: string): string {
 
 export function formatFallbackReport(date: string, items: RadarItem[], sourceResults: SourceFetchResult[], reason: string): string {
   const topItems = [...items].sort((left, right) => scoreRadarItem(right) - scoreRadarItem(left)).slice(0, 3);
-  const ignored = [...items].slice(3, 6);
 
   return [
     `# Daily Indie Radar｜${date}`,
     "",
     `> LLM summary unavailable or skipped: ${reason}`,
+    "",
+    "---",
     "",
     "## 今日 Top 3 机会",
     "",
@@ -28,9 +29,12 @@ export function formatFallbackReport(date: string, items: RadarItem[], sourceRes
       `- 建议动作：打开链接，记录目标用户、定价页、替代方案，并挑一个最小验证假设。`,
       "",
     ]),
-    "## 建议忽略的噪声",
+    "---",
     "",
-    ...ignored.map((item) => `- ${item.title}：排序靠后或信号不足，先不投入深度研究。`),
+    "## 全部候选产品分类速览",
+    "",
+    ...formatCategorizedOverview(items),
+    "---",
     "",
     "## 今日趋势信号",
     "",
@@ -38,19 +42,47 @@ export function formatFallbackReport(date: string, items: RadarItem[], sourceRes
     "- GitHub/HN/Product Hunt 的热度只能代表早期注意力，不能直接代表付费意愿。",
     "- 优先选择能通过 3-5 次用户访谈验证的问题。",
     "",
-    "## 可转成 Linear 任务的 Action Items",
-    "",
-    "- [ ] 从 Top 3 中选择 1 个做 30 分钟竞品拆解",
-    "- [ ] 找到 3 个潜在用户并验证是否愿意为该问题付费",
-    "- [ ] 写出 1 个 1 周内可完成的 MVP 假设",
-    "",
-    "## 数据源状态",
-    "",
-    ...sourceResults.map((result) =>
-      `- ${result.source}：${result.ok ? "ok" : "failed"}${result.error ? `，${result.error}` : ""}${result.warnings.length ? `，${result.warnings.join("; ")}` : ""}`,
-    ),
-    "",
   ].join("\n");
+}
+
+function formatCategorizedOverview(items: RadarItem[]): string[] {
+  if (!items.length) return ["- 信息不足：本次没有可分类候选。"];
+
+  const groups = new Map<string, RadarItem[]>();
+  for (const item of items) {
+    const category = fallbackCategory(item);
+    groups.set(category, [...(groups.get(category) ?? []), item]);
+  }
+
+  return [...groups.entries()].flatMap(([category, categoryItems]) => [
+    `### ${category}`,
+    "",
+    ...categoryItems.map((item) => `- ${item.title}：${oneLineFallbackDescription(item)}`),
+    "",
+  ]);
+}
+
+function fallbackCategory(item: RadarItem): string {
+  const haystack = `${item.title} ${item.description ?? ""} ${item.tags.join(" ")}`.toLowerCase();
+  if (haystack.includes("agent") || haystack.includes("workflow") || haystack.includes("automation")) {
+    return "AI Agent / 工作流自动化";
+  }
+  if (haystack.includes("developer tool") || haystack.includes("devtool") || item.source === "github") {
+    return "开发者工具 / 开源项目";
+  }
+  if (haystack.includes("local") || haystack.includes("privacy") || haystack.includes("mac")) {
+    return "本地优先 / 隐私生产力工具";
+  }
+  if (haystack.includes("crm") || haystack.includes("vertical") || haystack.includes("home")) {
+    return "垂直场景应用";
+  }
+  return "其他候选";
+}
+
+function oneLineFallbackDescription(item: RadarItem): string {
+  const description = item.description ?? "无描述";
+  const signal = item.tags.length ? `具备 ${item.tags.join(", ")} 信号` : "信号不足";
+  return `${description}；${signal}，需要人工进一步判断是否值得继续看。`;
 }
 
 export function formatItemsForPrompt(items: RadarItem[]): string {

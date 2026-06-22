@@ -26,7 +26,7 @@ const baseConfig: AppConfig = {
   skipLinear: false,
   mockSources: false,
   promptPath: "prompts/daily-radar.md",
-  maxCandidatesForLlm: 35,
+  maxCandidatesForLlm: 45,
 };
 
 test("Linear issue creation includes optional parent issue", () => {

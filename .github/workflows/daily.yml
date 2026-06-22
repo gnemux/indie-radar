@@ -54,4 +54,4 @@ jobs:
           SKIP_LINEAR: "false"
           MOCK_SOURCES: "false"
           PROMPT_PATH: prompts/daily-radar.md
-          MAX_CANDIDATES_FOR_LLM: ${{ vars.MAX_CANDIDATES_FOR_LLM || '35' }}
+          MAX_CANDIDATES_FOR_LLM: ${{ vars.MAX_CANDIDATES_FOR_LLM || '45' }}

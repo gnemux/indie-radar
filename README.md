@@ -73,7 +73,7 @@ DRY_RUN=true npm run start
 - `OPENROUTER_MAX_TOKENS`，默认 `5000`
 - `OPENROUTER_HTTP_REFERER`，可选，用于 OpenRouter app attribution
 - `OPENROUTER_APP_TITLE`，默认 `Indie Opportunity Radar`
-- `MAX_CANDIDATES_FOR_LLM`，默认 `35`
+- `MAX_CANDIDATES_FOR_LLM`，默认 `45`
 
 ## Linear 配置说明
 
