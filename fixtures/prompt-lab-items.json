@@ -1,0 +1,110 @@
+{
+  "date": "2026-06-22",
+  "items": [
+    {
+      "id": "lab:hn:trace",
+      "title": "Show HN: Trace - Offline Mac meeting transcripts you can flag mid-call",
+      "url": "https://traceapp.info",
+      "source": "hackernews",
+      "description": "A local-first Mac app for private meeting transcription with timestamp flags during calls.",
+      "scoreRaw": 342,
+      "commentsCount": 126,
+      "tags": ["ai", "productivity", "local-first", "macos"],
+      "metadata": {
+        "hnUrl": "https://news.ycombinator.com/item?id=lab-trace"
+      }
+    },
+    {
+      "id": "lab:hn:paca",
+      "title": "Show HN: Paca - Lightweight Jira alternative for human-AI collaboration",
+      "url": "https://github.com/Paca-AI/paca",
+      "source": "hackernews",
+      "description": "A project management board designed for humans and coding agents to coordinate work.",
+      "scoreRaw": 221,
+      "commentsCount": 97,
+      "tags": ["ai", "agent", "workflow", "developer tool", "open source"]
+    },
+    {
+      "id": "lab:ph:grassdx",
+      "title": "GrassDX",
+      "url": "https://grassdx.com",
+      "source": "producthunt",
+      "description": "AI lawn diagnosis from uploaded photos, with care recommendations for homeowners.",
+      "scoreRaw": 418,
+      "commentsCount": 36,
+      "tags": ["ai", "consumer", "vertical-ai", "home"]
+    },
+    {
+      "id": "lab:ph:quartz",
+      "title": "Quartz - Local AI email client for Mac",
+      "url": "https://example.com/quartz-mail",
+      "source": "producthunt",
+      "description": "A Mac email client that summarizes and drafts replies locally for privacy-sensitive users.",
+      "scoreRaw": 287,
+      "commentsCount": 29,
+      "tags": ["ai", "productivity", "local-first", "macos"]
+    },
+    {
+      "id": "lab:github:swytchcode",
+      "title": "swytchcode/agent-state-cli",
+      "url": "https://github.com/swytchcode/agent-state-cli",
+      "source": "github",
+      "description": "CLI that gives coding agents persistent project state, API access, and repeatable task context.",
+      "scoreRaw": 1840,
+      "commentsCount": 0,
+      "tags": ["ai", "agent", "developer tool", "workflow", "automation"],
+      "metadata": {
+        "language": "TypeScript",
+        "stars": 1840
+      }
+    },
+    {
+      "id": "lab:github:n8n",
+      "title": "n8n-io/n8n",
+      "url": "https://github.com/n8n-io/n8n",
+      "source": "github",
+      "description": "Fair-code workflow automation platform with a large ecosystem and many integrations.",
+      "scoreRaw": 132000,
+      "commentsCount": 0,
+      "tags": ["automation", "workflow", "open source"],
+      "metadata": {
+        "language": "TypeScript",
+        "stars": 132000
+      }
+    },
+    {
+      "id": "lab:github:tensorflow",
+      "title": "tensorflow/tensorflow",
+      "url": "https://github.com/tensorflow/tensorflow",
+      "source": "github",
+      "description": "Large-scale machine learning framework and ecosystem.",
+      "scoreRaw": 190000,
+      "commentsCount": 0,
+      "tags": ["ai", "open source"],
+      "metadata": {
+        "language": "C++",
+        "stars": 190000
+      }
+    },
+    {
+      "id": "lab:hn:roman-map",
+      "title": "I am building a map of people who lived in the Roman Empire",
+      "url": "https://example.com/roman-empire-map",
+      "source": "hackernews",
+      "description": "A personal historical visualization project without a clear commercial path.",
+      "scoreRaw": 176,
+      "commentsCount": 51,
+      "tags": []
+    },
+    {
+      "id": "lab:ph:generic-ai-landing",
+      "title": "LaunchPage AI",
+      "url": "https://example.com/launchpage-ai",
+      "source": "producthunt",
+      "description": "Generate landing pages from one prompt for early-stage founders.",
+      "scoreRaw": 142,
+      "commentsCount": 11,
+      "tags": ["ai", "saas", "productivity"]
+    }
+  ]
+}

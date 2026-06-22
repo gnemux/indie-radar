@@ -93,7 +93,7 @@ LINEAR_PARENT_ISSUE_ID=父Issue的UUID
 
 此时日报仍会属于 `LINEAR_TEAM_ID` 和 `LINEAR_PROJECT_ID` 指定的位置，同时也会显示为该父 Issue 的子 Issue。
 
-## 修改核心提示词
+## 本地优化提示词
 
 核心提示词在：
 
@@ -109,7 +109,37 @@ prompts/daily-radar.md
 - 加入输出评分：例如“每个 Top 机会给出 1-5 分：付费意愿、获客难度、MVP 难度、竞争强度”。
 - 加入反证要求：例如“必须写出一个可能证明这个机会不值得做的信号”。
 
-修改后本地运行 `DRY_RUN=true MOCK_SOURCES=true npm run start`，查看 `output/` 里的 Markdown。
+推荐用固定样本测试 Prompt，这样每次输入一致，方便判断是不是提示词本身变好或变差：
+
+```bash
+npm run prompt:lab
+```
+
+它会读取 `fixtures/prompt-lab-items.json`，使用 `prompts/daily-radar.md`，不发布到 Linear，并把结果写到 `output/prompt-lab-*.md`。
+
+测试一个实验版提示词：
+
+```bash
+PROMPT_PATH=prompts/daily-radar-experiment.md npm run prompt:lab
+```
+
+只验证脚本和格式、不调用大模型：
+
+```bash
+SKIP_LLM=true npm run prompt:lab
+```
+
+用实时公开数据测试，但不发布到 Linear：
+
+```bash
+npm run prompt:live
+```
+
+快速跑本地模拟数据：
+
+```bash
+npm run prompt:mock
+```
 
 ## GitHub Actions
 

@@ -8,7 +8,10 @@
     "start": "npm run build && node dist/src/index.js",
     "build": "tsc",
     "test": "npm run build && node --test dist/tests/*.test.js",
-    "check": "npm run build && npm run test"
+    "check": "npm run build && npm run test",
+    "prompt:lab": "npm run build && node dist/src/promptLab.js",
+    "prompt:live": "SKIP_LINEAR=true DRY_RUN=false npm run start",
+    "prompt:mock": "DRY_RUN=true MOCK_SOURCES=true npm run start"
   },
   "engines": {
     "node": ">=20"
